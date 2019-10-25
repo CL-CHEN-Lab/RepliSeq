@@ -4,7 +4,10 @@ Title: Repliseq
 Version: 0.1.0
 Author: Sami EL HILALI
 Maintainer: Sami EL HILALI <elhilali.sami@gmail.com>
-Description: This Package contains a set of functions that were used to get the results listed in th pubication https://doi.org/10.1101/714717. These functions goes from automating the loading of repliseq data to computation of metrics such as S50 or URI.
+Description: This Package contains a set of functions for the analysis of Repli-Seq data to 
+study DNA replication timing program. These functions handles repliseq assays as data frames 
+from count matrices (bedgraph format !!) and performs such things as 
+rescaling, data normalization, replication timing calculation (S50), URI calculation.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
