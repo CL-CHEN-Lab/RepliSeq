@@ -1,0 +1,38 @@
+---
+title: "how-to-use"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{how-to-use}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(RepliSeq)
+```
+
+# readRS() :
+
+```{r}
+
+## args :
+temp.paths <- c("../inst/extdata/NT1-S1.bdg","../inst/extdata/NT1-S2.bdg")
+temp.fractions <- c("S1","S2")
+
+## apply function :
+temp.RS <- readRS(temp.paths,temp.fractions)
+
+## outputs :
+head(temp.RS)
+typeof(temp.RS)
+summary(temp.RS)
+
+```
+
