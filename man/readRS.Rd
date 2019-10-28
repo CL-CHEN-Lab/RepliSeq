@@ -2,7 +2,7 @@
 % Please edit documentation in R/readRS.R
 \name{readRS}
 \alias{readRS}
-\title{read RepliSeq assay data (bedgraph)}
+\title{Read Repli-seq assay data (bedgraph format).}
 \usage{
 readRS(paths_data, fractions)
 }
@@ -12,10 +12,8 @@ readRS(paths_data, fractions)
 \item{fractions}{list of fractions names}
 }
 \value{
-a dataframe composed of genomic coordinates plus all the specified fractions as for example
-    chr,start,stop,S1,S2,S3,S4,S5,S6
+a dataframe composed of genomic coordinates plus all the specified fractions as for example : chr,start,stop,S1,S2,S3,S4,S5,S6
 }
 \description{
-Read Repli-seq assay data (bedgraph format).
 Bedgraphs with a one line header and with similar organization (same length and sorted)
 }
