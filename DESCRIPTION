@@ -1,7 +1,7 @@
 Package: RepliSeq
 Type: Package
 Title: Repliseq
-Version: 0.1.0
+Version: 0.0.0.9000
 Author: Sami EL HILALI
 Maintainer: Sami EL HILALI <elhilali.sami@gmail.com>
 Description: This Package contains a set of functions for the analysis of Repli-Seq data to study DNA replication timing program. These functions handles repliseq assays as data frames from count matrices (bedgraph format !!) and performs such things as rescaling, data normalization, replication timing calculation (S50), URI calculation.
