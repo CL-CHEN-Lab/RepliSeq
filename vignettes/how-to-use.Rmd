@@ -29,28 +29,60 @@ chr22	50000	100000	0
 ```{r}
 
 ### args :
-temp.paths <- c("../inst/extdata/NT_chr22-s1.bdg","../inst/extdata/NT_chr22-s2.bdg","../inst/extdata/NT_chr22-s3.bdg",
+temp_paths <- c("../inst/extdata/NT_chr22-s1.bdg","../inst/extdata/NT_chr22-s2.bdg","../inst/extdata/NT_chr22-s3.bdg",
                 "../inst/extdata/NT_chr22-s4.bdg","../inst/extdata/NT_chr22-s5.bdg","../inst/extdata/NT_chr22-s6.bdg")
-temp.fractions <- c("S1","S2","S3","S4","S5","S6")
-
+temp_fractions <- c("S1","S2","S3","S4","S5","S6")
 
 ### 2 fractions RepliSeq
 # apply function :
-RS_early <- readRS(temp.paths[1:2],temp.fractions[1:2])
+RS_early <- readRS(temp_paths[1:2],temp_fractions[1:2])
 # outputs :
-head(RS_early)
-print(typeof(RS_early))
-print(summary(RS_early))
+tail(RS_early)
+typeof(RS_early)
+summary(RS_early)
 
 ### 6 fractions RepliSeq
 # apply function :
-RS_all <- readRS(temp.paths,temp.fractions)
+RS_all <- readRS(temp_paths,temp_fractions)
 # outputs :
-head(RS_all)
-typeof(RS_all)
-summary(RS_all)
+tail(RS_all)
+
+### 1 fraction RepliSeq ( for S0 controls )
+# apply function : 
+RS_S0 <- readRS(temp_paths[1],"S0")
+# outputs :
+tail(RS_S0)
 
 ```
+
+# rescaleRS(rs_assay,scale_factor) :
+
+This functions rescales Repli-seq assays loaded with readRS to lower resolution ( e.g. from 1kb windows to 50kb windows or 100kb)
+
+```{r}
+
+# To rescale from 50kb to 100kb the scale_factor is 2 ( from 1kb to 50kb it would be 50)
+
+### 2 fractions RepliSeq
+# apply function :
+RS_early_100kb <- rescaleRS(RS_early,2)
+# outputs :
+tail(RS_early_100kb)
+
+### 2 fractions RepliSeq
+# apply function :
+RS_all_100kb <- rescaleRS(RS_all,2)
+# outputs :
+tail(RS_all_100kb)
+
+### 1 fraction RepliSeq ( for S0 controls )
+# apply function :
+RS_S0_100kb <- rescaleRS(RS_S0,2)
+# outputs :
+tail(RS_S0_100kb)
+
+```
+
 
 # calculateS50(rs_assay,fractions) :
 
@@ -58,14 +90,13 @@ summary(RS_all)
 
 ### 2 fractions RepliSeq
 # apply function :
-temp.S50 <- RepliSeq::calculateS50(RS_early,temp.fractions[1:2])
+temp.S50 <- RepliSeq::calculateS50(RS_early,temp_fractions[1:2])
 # outputs :
 tail(temp.S50)
-summary(temp.S50$S50)
 
 ### 6 fractions RepliSeq
 # apply function :
-temp.S50 <- RepliSeq::calculateS50(RS_all,temp.fractions)
+temp.S50 <- RepliSeq::calculateS50(RS_all,temp_fractions)
 # outputs :
 tail(temp.S50)
 summary(temp.S50$S50)

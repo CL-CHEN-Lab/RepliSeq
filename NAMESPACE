@@ -2,6 +2,9 @@
 
 export(calculateS50)
 export(readRS)
+export(rescaleRS)
 import(magrittr)
+importFrom(dplyr,funs)
+importFrom(dplyr,mutate_each)
 importFrom(dplyr,rename)
 importFrom(dplyr,select)
