@@ -3,6 +3,7 @@
 export(calculateS50)
 export(readRS)
 export(rescaleRS)
+export(smoothRS)
 import(magrittr)
 importFrom(dplyr,funs)
 importFrom(dplyr,mutate_each)

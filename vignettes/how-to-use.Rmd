@@ -83,6 +83,36 @@ tail(RS_S0_100kb)
 
 ```
 
+# smoothRS(rs_assay,scale_factor) :
+
+This functions rescales Repli-seq assays loaded with readRS to lower resolution ( e.g. from 1kb windows to 50kb windows or 100kb)
+
+```{r}
+
+# To get 50kb smoothed profiles from 1kb adjacent profiles smooth_factor = 50 --> results in count matrices with 
+# genomic windows having a step = 1kb and a span of 50kb.
+# From 50kb to 100kb the smooth_factor is 2 
+
+### 2 fractions RepliSeq
+# apply function :
+RS_early_smoothed_2 <- smoothRS(RS_early,2)
+# outputs :
+tail(RS_early_smoothed_2)
+
+### 2 fractions RepliSeq
+# apply function :
+RS_all_100kb <- rescaleRS(RS_all,2)
+# outputs :
+tail(RS_all_100kb)
+
+### 1 fraction RepliSeq ( for S0 controls )
+# apply function :
+RS_S0_100kb <- rescaleRS(RS_S0,2)
+# outputs :
+tail(RS_S0_100kb)
+
+```
+
 
 # calculateS50(rs_assay,fractions) :
 
