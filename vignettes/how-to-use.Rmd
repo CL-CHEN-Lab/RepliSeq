@@ -18,7 +18,13 @@ knitr::opts_chunk$set(
 library(RepliSeq)
 ```
 
-# readRS() :
+# readRS(paths_data,fractions) :
+
+This functions reads Repli-seq assays from multiple files (one file for one fraction) and outputs a dataframe from it.
+It requires bedgraph inputs with a one line header listing options, with **no other comments** such as : [(bedgraph spec)](http://genome.ucsc.edu/goldenPath/help/bedgraph.html)   
+track 	type=bedGraph 	name=NT_chr22-s1	description=50kbprofile   
+chr22	0	50000	0   
+chr22	50000	100000	0   
 
 ```{r}
 
@@ -43,6 +49,26 @@ RS_all <- readRS(temp.paths,temp.fractions)
 head(RS_all)
 typeof(RS_all)
 summary(RS_all)
+
+```
+
+# calculateS50(rs_assay,fractions) :
+
+```{r}
+
+### 2 fractions RepliSeq
+# apply function :
+temp.S50 <- RepliSeq::calculateS50(RS_early,temp.fractions[1:2])
+# outputs :
+tail(temp.S50)
+summary(temp.S50$S50)
+
+### 6 fractions RepliSeq
+# apply function :
+temp.S50 <- RepliSeq::calculateS50(RS_all,temp.fractions)
+# outputs :
+tail(temp.S50)
+summary(temp.S50$S50)
 
 ```
 
