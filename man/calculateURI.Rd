@@ -2,7 +2,7 @@
 % Please edit documentation in R/calculateURI.R
 \name{calculateURI}
 \alias{calculateURI}
-\title{Title}
+\title{calculate URI}
 \usage{
 calculateURI(rs_x, rs_y)
 }
@@ -15,5 +15,5 @@ calculateURI(rs_x, rs_y)
 a dataframe composed of genomic coordinates plus sum_x, sum_y, mean_xy and URI : chr,start,stop,sum_x,sum_y,mean_xy,URI
 }
 \description{
-Title
+Calculate the under replication index of two compared Repli-seq assays
 }

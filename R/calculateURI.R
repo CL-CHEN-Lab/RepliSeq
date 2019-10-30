@@ -1,4 +1,5 @@
-#' Title
+#' @title calculate URI
+#' @description Calculate the under replication index of two compared Repli-seq assays
 #'
 #' @param rs_x a Repli-seq assay (data.frame) loaded with readRS() and formatted as chr,start,stop,S1,...,Sx
 #' @param rs_y a Repli-seq assay (data.frame) loaded with readRS() and formatted as chr,start,stop,S1,...,Sx
