@@ -133,3 +133,37 @@ summary(temp.S50$S50)
 
 ```
 
+
+# calculateURI(rs_x, rs_y) :
+
+This functions calculates URI between two Repli-seq assays. It returns a dataframe with the following columns :   
+chr,start,stop,sum_x,sum_y,mean_xy,URI
+
+
+```{r}
+## load second Repli-seq assay for comparison :
+### args :
+aph_paths <- c("../inst/extdata/Aph_chr22-s1.bdg","../inst/extdata/Aph_chr22-s2.bdg","../inst/extdata/Aph_chr22-s3.bdg",
+                "../inst/extdata/Aph_chr22-s4.bdg","../inst/extdata/Aph_chr22-s5.bdg","../inst/extdata/Aph_chr22-s6.bdg")
+aph_fractions <- c("S1","S2","S3","S4","S5","S6")
+
+# read :
+RS_aph_all <- readRS(aph_paths,aph_fractions)
+RS_aph_early <- readRS(aph_paths[1:2],aph_fractions[1:2])
+
+### 2 fractions RepliSeq
+# apply function :
+aph_nt_uri <- calculateURI(RS_aph_early,RS_early)
+# outputs :
+tail(aph_nt_uri)
+
+### 6 fractions RepliSeq
+# apply function :
+aph_nt_uri <- calculateURI(RS_aph_all,RS_all)
+# outputs :
+tail(aph_nt_uri)
+
+
+
+```
+
