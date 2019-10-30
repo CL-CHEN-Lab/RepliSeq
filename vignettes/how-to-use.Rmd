@@ -169,4 +169,21 @@ tail(aph_nt_uri)
 ```
 
 
+# calculateNoiseRatios(rs_assay, rs_control) :
+
+```{r}
+
+### 2 fractions RepliSeq
+# apply function :
+ratios_early <- calculateNoiseRatios(RS_early, RS_S0)
+# outputs :
+print(ratios_early)
+
+### 6 fractions RepliSeq
+# apply function :
+ratios_all <- calculateNoiseRatios(RS_all, RS_S0)
+# outputs :
+print(ratios_all)
+
+```
 
