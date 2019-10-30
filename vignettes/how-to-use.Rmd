@@ -187,3 +187,23 @@ print(ratios_all)
 
 ```
 
+# removeNoise(rs_assay, rs_control, noise_ratios) :
+
+```{r}
+
+### 2 fractions RepliSeq
+# apply function :
+RS_noise_rm_early <- removeNoise(RS_early, RS_S0,ratios_early)
+# outputs :
+tail(RS_noise_rm_early)
+
+### 6 fractions RepliSeq
+# apply function :
+RS_noise_rm_all <- removeNoise(RS_all, RS_S0,ratios_all)
+# outputs :
+tail(RS_noise_rm_all)
+
+```
+
+
+
