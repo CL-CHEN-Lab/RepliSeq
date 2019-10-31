@@ -205,5 +205,30 @@ tail(RS_noise_rm_all)
 
 ```
 
+# doubleXchr(rs_assay) :
+
+This function can be used to double the values in count matrices at chrX as for example when normalization haven't been performed on raw data from human male samples.
+
+```{r}
+
+### 2 fractions RepliSeq
+# apply function :
+RS_early_doubledX <- doubleXchr(RS_early,chr = "chr22") # default chr parameter is "chrX"
+# outputs :
+tail(RS_early_doubledX)
+
+### 6 fractions RepliSeq
+# apply function :
+RS_all_doubledX <- doubleXchr(RS_all,chr = "chr22") # default chr parameter is "chrX"
+# outputs :
+tail(RS_all_doubledX)
+
+### 1 fractions RepliSeq (for S0 controls)
+# apply function :
+RS_S0_doubledX <- doubleXchr(RS_S0,chr = "chr22") # default chr parameter is "chrX"
+# outputs :
+tail(RS_S0_doubledX)
+
+```
 
 

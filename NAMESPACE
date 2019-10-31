@@ -3,6 +3,7 @@
 export(calculateNoiseRatios)
 export(calculateS50)
 export(calculateURI)
+export(doubleXchr)
 export(readRS)
 export(removeNoise)
 export(rescaleRS)
