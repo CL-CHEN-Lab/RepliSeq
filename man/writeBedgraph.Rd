@@ -9,7 +9,7 @@ writeBedgraph(rs_assay, path_file, sample_name, system_separator = "/")
 \arguments{
 \item{rs_assay}{a Repli-seq assay (data.frame) loaded with readRS() and formatted as chr,start,stop,S1,...,Sx (or S0)}
 
-\item{path_file}{a path to the}
+\item{path_file}{a path to the files to write}
 
 \item{sample_name}{a string for the file names}
 

@@ -2,7 +2,7 @@
 #' @description writes one bedgraph file per fraction in the provided Repli-seq assay
 #'
 #' @param rs_assay a Repli-seq assay (data.frame) loaded with readRS() and formatted as chr,start,stop,S1,...,Sx (or S0)
-#' @param path_file a path to the 
+#' @param path_file a path to the files to write
 #' @param sample_name a string for the file names
 #' @param system_separator default is "/" as dedicated for linux file system
 #'
