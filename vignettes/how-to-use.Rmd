@@ -246,3 +246,23 @@ writeBedgraph(RS_S0,"../inst/extdata/output","NT")
 
 ```
 
+
+# writeBigwig(rs_assay,path_file,sample_name,chromsizes,wiggle_start,wiggle_step_wiggle_span) : 
+
+**(requires [wigToBigWig](https://www.encodeproject.org/software/wigtobigwig/) installed on the system)**.   
+This function writes Bigwig profiles for all the fractions of a provided Repli-seq assay. It requires UCSC's WigToBigWig installed to convert from Wiggle to BigWig.
+
+```{r}
+
+### 2 fractions RepliSeq
+writeBigwig(RS_early,"../inst/extdata/output","NT_early","../inst/extdata/Hg19/chromsizes.txt",wiggle_start = 1,wiggle_step = 50000, wiggle_span = 50000)
+
+### 6 fractions RepliSeq
+writeBigwig(RS_all,"../inst/extdata/output","NT_all","../inst/extdata/Hg19/chromsizes.txt",wiggle_start = 1,wiggle_step = 50000, wiggle_span = 50000)
+
+### 1 fraction RepliSeq (for S0 control)
+writeBigwig(RS_S0,"../inst/extdata/output","NT","../inst/extdata/Hg19/chromsizes.txt",wiggle_start = 1,wiggle_step = 50000, wiggle_span = 50000)
+
+```
+
+
