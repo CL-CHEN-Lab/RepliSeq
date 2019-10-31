@@ -223,7 +223,7 @@ RS_all_doubledX <- doubleXchr(RS_all,chr = "chr22") # default chr parameter is "
 # outputs :
 tail(RS_all_doubledX)
 
-### 1 fractions RepliSeq (for S0 controls)
+### 1 fraction RepliSeq (for S0 controls)
 # apply function :
 RS_S0_doubledX <- doubleXchr(RS_S0,chr = "chr22") # default chr parameter is "chrX"
 # outputs :
@@ -231,4 +231,18 @@ tail(RS_S0_doubledX)
 
 ```
 
+# writeBedgraph(rs_assay,path_file,sample_name) :
+
+```{r}
+
+### 2 fractions RepliSeq
+writeBedgraph(RS_early,"../inst/extdata/output","NT_early")
+
+### 6 fractions RepliSeq
+writeBedgraph(RS_all,"../inst/extdata/output","NT_all")
+
+### 1 fraction RepliSeq (for S0 controls)
+writeBedgraph(RS_S0,"../inst/extdata/output","NT")
+
+```
 
