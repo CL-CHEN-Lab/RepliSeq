@@ -8,7 +8,7 @@ An R package that features a set of functions to conduct Repli-seq data analysis
 We propose with this package to analyze Repli-seq data from within data.frames which lets you easily 
 complete your analysis with dplyr, calculate intersections with tidygenomics and plot your results with ggplot vizualizations.   
 RepliSeq functions includes **loading** multi-fractions Repli-seq assays data as count matrices 
-(from 1 fraction for controls to x defined by you hardware capabilities) ; **normalization** ; **rescaling** ; 
+(from 1 fraction for controls to x defined by you hardware capabilities) ; **rescaling** profiles ; **smoothing** profiles ;
 calculting metrics such as **S50** (replication timing) and **URI** (Under replication index got 
 from two repliseq assays comparison).
 
@@ -22,3 +22,131 @@ You can install this package by entering the following from within R :
 devtools::install_github("CL-CHEN-Lab/RepliSeq")
 
 ```
+
+## Usage examples : 
+
+We propose an overview of some functions. For extended documentation, please refer to the Vignette.
+
+#### readRS(path_data,fractions) :
+
+This functions reads Repli-seq assays from multiple files (one file for one fraction) and outputs a dataframe from it.   
+It requires bedgraph inputs [(see bedgraph spec)](http://genome.ucsc.edu/goldenPath/help/bedgraph.html) with a one line header listing options but **no other comments** such as :  
+
+track 	type=bedGraph 	name=NT_chr22-s1	description=50kbprofile   
+chr22	0	50000	0   
+chr22	50000	100000	0   
+
+```{r}
+
+### args :
+temp_paths <- c("../inst/extdata/NT_chr22-s1.bdg","../inst/extdata/NT_chr22-s2.bdg",
+                "../inst/extdata/NT_chr22-s3.bdg","../inst/extdata/NT_chr22-s4.bdg",
+                "../inst/extdata/NT_chr22-s5.bdg","../inst/extdata/NT_chr22-s6.bdg")
+temp_fractions <- c("S1","S2","S3","S4","S5","S6")
+
+### 2 fractions RepliSeq
+# apply function :
+RS_early <- readRS(temp_paths[1:2],temp_fractions[1:2])
+
+### 6 fractions RepliSeq
+# apply function :
+RS_all <- readRS(temp_paths,temp_fractions)
+
+### 1 fraction RepliSeq ( for S0 controls )
+# apply function : 
+RS_S0 <- readRS("../inst/extdata/NT_chr22-s0.bdg","S0")
+
+### Result :
+
+tail(RS_early)
+
+```
+
+| chr    | start    | stop     | S1     | S2    |
+|--------|----------|----------|--------|-------|
+| <fctr> | <int>    | <int>    | <dbl>  | <dbl> |
+| chr22  | 51000000 | 51050000 | 12.392 | 4.929 |
+| chr22  | 51050000 | 51100000 | 11.604 | 5.887 |
+| chr22  | 51100000 | 51150000 | 12.568 | 7.941 |
+| chr22  | 51150000 | 51200000 | 9.853  | 5.887 |
+| chr22  | 51200000 | 51250000 | 2.584  | 1.711 |
+| chr22  | 51250000 | 51300000 | 0.000  | 0.000 |
+
+
+#### calculateS50(rs_assay) :
+
+This functions returns a dataframe composed of genomic coordinates associated with replication timing as an S50 value comprised within 0 (early replicating) and 1 (late replicating)
+
+```{r}
+
+temp_rs <- data.frame(chr = rep("chr1",7),
+                      start = seq(0,6000,1000),
+                      stop = seq(1000,7000,1000),
+                      S1 = c(0,0,0,1,1,1,1),
+                      S2 = c(0,0,1,1,1,1,0),
+                      S3 = c(0,1,1,1,1,0,0),
+                      S4 = c(1,1,1,1,0,0,0))
+
+
+temp_S50 <- RepliSeq::calculateS50(temp_rs)
+
+# Result :
+
+print(temp_S50)
+
+```
+
+| chr    | start | stop  | S50   |
+|--------|-------|-------|-------|
+| <fctr> | <dbl> | <dbl> | <dbl> |
+| chr1   | 0     | 1000  | 0.875 |
+| chr1   | 1000  | 2000  | 0.750 |
+| chr1   | 2000  | 3000  | 0.625 |
+| chr1   | 3000  | 4000  | 0.500 |
+| chr1   | 4000  | 5000  | 0.375 |
+| chr1   | 5000  | 6000  | 0.250 |
+| chr1   | 6000  | 7000  | 0.125 |
+
+
+#### calculateURI(rs_x, rs_y) :
+
+This functions calculates URI between two Repli-seq assays. It returns a dataframe with the following columns :   
+chr,start,stop,sum_x,sum_y,mean_xy,URI
+
+
+```{r}
+####### load second Repli-seq assay for comparison 
+####### 6 fractions RepliSeq
+
+# args :
+
+aph_paths <- c("../inst/extdata/Aph_chr22-s1.bdg","../inst/extdata/Aph_chr22-s2.bdg",
+               "../inst/extdata/Aph_chr22-s3.bdg","../inst/extdata/Aph_chr22-s4.bdg",
+               "../inst/extdata/Aph_chr22-s5.bdg","../inst/extdata/Aph_chr22-s6.bdg")
+aph_fractions <- temp_fractions
+
+# read :
+
+RS_aph_all <- readRS(aph_paths,aph_fractions)
+
+# apply function :
+
+aph_nt_uri <- calculateURI(RS_aph_all,RS_all)
+
+# Result :
+
+tail(aph_nt_uri)
+
+
+```
+
+| chr    | start    | stop     | sum_x  | sum_y  | mean_xy | URI         |
+|--------|----------|----------|--------|--------|---------|-------------|
+| <fctr> | <int>    | <int>    | <dbl>  | <dbl>  | <dbl>   | <dbl>       |
+| chr22  | 51000000 | 51050000 | 27.581 | 30.869 | 29.225  | -1.37048107 |
+| chr22  | 51050000 | 51100000 | 30.556 | 31.274 | 30.915  | -0.66372243 |
+| chr22  | 51100000 | 51150000 | 38.770 | 36.226 | 37.498  | 0.05718338  |
+| chr22  | 51150000 | 51200000 | 32.394 | 26.028 | 29.211  | 1.24529116  |
+| chr22  | 51200000 | 51250000 | 10.063 | 8.533  | 9.298   | 0.82273039  |
+| chr22  | 51250000 | 51300000 | 0.000  | 0.000  | 0.000   | NaN         |
+  
