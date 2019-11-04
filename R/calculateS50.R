@@ -2,16 +2,16 @@
 #' @description Calculate replication timing S50 values from Repli-seq assay (data.frame)
 #'
 #' @param rs_assay a Repli-seq assay (data.frame) loaded with readRS() and formatted as chr,start,stop,S1,...,Sx
-#' @param fractions list of fractions to consider for calculating S50 values. usually all the fractions from the data.frame
 #'
 #' @return a dataframe composed of genomic coordinates plus S50 : chr,start,stop,S50
 #' @export
 #'
 
 
-calculateS50 <- function(rs_assay,fractions) {
+calculateS50 <- function(rs_assay) {
+  fractions <- rs_assay[,!(names(rs_assay) %in% c("chr","start","stop"))]
   # extract fractions as matrix :
-  assay <- as.matrix(subset(rs_assay,TRUE,select = fractions))
+  assay <- as.matrix(fractions)
   # calculate S50 with function s50
   temp_s50 <- apply(assay,1,s50)
   # concatenate genomic coordinates and calculated s50 in data frame to return

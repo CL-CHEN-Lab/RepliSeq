@@ -114,19 +114,31 @@ tail(RS_S0_100kb)
 ```
 
 
-# calculateS50(rs_assay,fractions) :
+# calculateS50(rs_assay) :
 
 ```{r}
 
+temp_rs <- data.frame(chr = rep("chr1",7),
+                      start = seq(0,6000,1000),
+                      stop = seq(1000,7000,1000),
+                      S1 = c(0,0,0,1,1,1,1),
+                      S2 = c(0,0,1,1,1,1,0),
+                      S3 = c(0,1,1,1,1,0,0),
+                      S4 = c(1,1,1,1,0,0,0))
+
+
+temp_S50 <- RepliSeq::calculateS50(temp_rs)
+print(temp_S50)
+
 ### 2 fractions RepliSeq
 # apply function :
-temp.S50 <- RepliSeq::calculateS50(RS_early,temp_fractions[1:2])
+temp.S50 <- RepliSeq::calculateS50(RS_early)
 # outputs :
 tail(temp.S50)
 
 ### 6 fractions RepliSeq
 # apply function :
-temp.S50 <- RepliSeq::calculateS50(RS_all,temp_fractions)
+temp.S50 <- RepliSeq::calculateS50(RS_all)
 # outputs :
 tail(temp.S50)
 summary(temp.S50$S50)

@@ -4,12 +4,10 @@
 \alias{calculateS50}
 \title{Calculate S50.}
 \usage{
-calculateS50(rs_assay, fractions)
+calculateS50(rs_assay)
 }
 \arguments{
 \item{rs_assay}{a Repli-seq assay (data.frame) loaded with readRS() and formatted as chr,start,stop,S1,...,Sx}
-
-\item{fractions}{list of fractions to consider for calculating S50 values. usually all the fractions from the data.frame}
 }
 \value{
 a dataframe composed of genomic coordinates plus S50 : chr,start,stop,S50
