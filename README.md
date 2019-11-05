@@ -1,4 +1,4 @@
-# RepliSeq
+# RepliSeq [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 Analysis of Repli-Seq data to study DNA replication timing program in R.
 
