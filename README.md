@@ -9,7 +9,7 @@ Analysis of Repli-Seq data to study DNA replication timing program in R.
 An R package that features a set of functions to conduct Repli-seq data analysis in R.  
 We propose this package to analyze Repli-seq data within data.frames, which lets you easily 
 complete your analysis with dplyr, calculate intersections with tidygenomics and plot your results with ggplot vizualizations.   
-RepliSeq functions include **loading** multi-fractions (from 1 to N fractions defined by your experiment dessign and your hardware capabilities) Repli-seq assay data as count matrices; **rescaling** profiles; **smoothing** profiles;
+RepliSeq functions include **loading** multi-fractions (from 2 to N fractions defined by your experiment dessign and your hardware capabilities) Repli-seq assay data as count matrices; **rescaling** profiles; **smoothing** profiles;
 calculting metrics such as **Replication timing** (calculated as the S50, on a scale from 0, early, to 1, late, which is the moment in S phase when a sequence has been replicated in 50% of cells replication timing) and **URI** (Under replication index got 
 from two repliseq assays comparison).
 
