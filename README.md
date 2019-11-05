@@ -35,12 +35,12 @@ In addition, the function **writeBigWig()** requires UCSC's **wigToBigWig** appl
 
 ## Usage examples : 
 
-We propose an overview of some functions. For extended documentation, please refer to the Vignette.
+We propose an overview of some functions usage. For extended documentation, please refer to the Vignette *how-to-use*.
 
 #### readRS(path_data,fractions) :
 
 This functions reads Repli-seq assays from multiple files (one file for one fraction) and outputs a dataframe from it.   
-It requires bedgraph inputs [(see bedgraph spec)](http://genome.ucsc.edu/goldenPath/help/bedgraph.html) with a one line header listing options but **no other comments** such as :  
+It requires bedgraph inputs [(see bedgraph spec)](http://genome.ucsc.edu/goldenPath/help/bedgraph.html) with a one line header but **no other comments** such as :  
 
 track 	type=bedGraph 	name=NT_chr22-s1	description=50kbprofile   
 chr22	0	50000	0   
