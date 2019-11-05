@@ -27,7 +27,12 @@ devtools::install_github("CL-CHEN-Lab/RepliSeq")
 
 ## Requirements :
 
-As mentionned in the DESCRIPTION, this packages imports :  
+This package depends on :
+
+* R version >= 3.4.4 (2018-03-15)
+
+As mentionned in the DESCRIPTION, this packages imports : 
+
 * dplyr (>= 0.8.3)  
 * magrittr (>= 1.5)
 
