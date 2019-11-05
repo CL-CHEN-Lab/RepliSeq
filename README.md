@@ -1,6 +1,8 @@
-# RepliSeq [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+# RepliSeq   
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-Analysis of Repli-Seq data to study DNA replication timing program in R.
+Analysis of Repli-Seq data to study DNA replication timing program in R.  
+
 
 ## Description :
 
@@ -22,6 +24,14 @@ You can install this package by entering the following from within R :
 devtools::install_github("CL-CHEN-Lab/RepliSeq")
 
 ```
+
+## Requirements :
+
+As mentionned in the DESCRIPTION, this packages imports :  
+* dplyr (>= 0.8.3)  
+* magrittr (>= 1.5)
+
+In addition, the function **writeBigWig()** requires UCSC's **wigToBigWig** application to be installed on the computer. It can be found at [encodeproject](https://www.encodeproject.org/software/wigtobigwig/) 
 
 ## Usage examples : 
 
