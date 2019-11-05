@@ -16,7 +16,7 @@ from two repliseq assays comparison).
 
 ## Installation :
 
-You can install this package by entering the following within R :
+You can install this package by entering the following within R:
 
 ```{r}
 
