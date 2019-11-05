@@ -4,20 +4,19 @@
 Analysis of Repli-Seq data to study DNA replication timing program in R.  
 
 
-## Description :
+## Description:
 
 An R package that features a set of functions to conduct Repli-seq data analysis in R.  
-We propose with this package to analyze Repli-seq data from within data.frames which lets you easily 
+We propose this package to analyze Repli-seq data within data.frames, which lets you easily 
 complete your analysis with dplyr, calculate intersections with tidygenomics and plot your results with ggplot vizualizations.   
-RepliSeq functions includes **loading** multi-fractions Repli-seq assays data as count matrices 
-(from 1 fraction for controls to x defined by you hardware capabilities) ; **rescaling** profiles ; **smoothing** profiles ;
-calculting metrics such as **S50** (replication timing) and **URI** (Under replication index got 
+RepliSeq functions include **loading** multi-fractions (from 1 to N fractions defined by your experiment dessign and your hardware capabilities) Repli-seq assay data as count matrices; **rescaling** profiles; **smoothing** profiles;
+calculting metrics such as **Replication timing** (calculated as the S50, on a scale from 0, early, to 1, late, which is the moment in S phase when a sequence has been replicated in 50% of cells replication timing) and **URI** (Under replication index got 
 from two repliseq assays comparison).
 
 
 ## Installation :
 
-You can install this package by entering the following from within R :
+You can install this package by entering the following within R :
 
 ```{r}
 
@@ -25,13 +24,13 @@ devtools::install_github("CL-CHEN-Lab/RepliSeq")
 
 ```
 
-## Requirements :
+## Requirements:
 
-This package depends on :
+This package depends on:
 
 * R version >= 3.4.4 (2018-03-15)
 
-As mentionned in the DESCRIPTION, this packages imports : 
+As mentionned in the DESCRIPTION, this packages imports: 
 
 * dplyr (>= 0.8.3)  
 * magrittr (>= 1.5)
@@ -44,16 +43,16 @@ Sami EL HILALI : sami.el-hilali@curie.fr
 
 Chunlong CHEN : chunlong.chen@curie.fr
 
-Don't hesitate to contact the authors or open an issue for a question or if you wish to see new features added to this package.
+Don't hesitate to contact the authors or open an issue for a question or if you wish to see new features to be added to this package.
 
-## Usage examples : 
+## Usage examples: 
 
-We propose an overview of some functions usage. For extended documentation, please refer to the Vignette *how-to-use*.
+We propose an overview of some function usage. For extended documentation, please refer to the Vignette *how-to-use*.
 
-#### readRS(path_data,fractions) :
+#### readRS(path_data,fractions):
 
-This functions reads Repli-seq assays from multiple files (one file for one fraction) and outputs a dataframe from it.   
-It requires bedgraph inputs [(see bedgraph spec)](http://genome.ucsc.edu/goldenPath/help/bedgraph.html) with a one line header but **no other comments** such as :  
+This function reads Repli-seq assays from multiple files (one file for one fraction) and outputs a dataframe from it.   
+It requires bedgraph inputs [(see bedgraph spec)](http://genome.ucsc.edu/goldenPath/help/bedgraph.html) with a one line header but **no other comments** such as:  
 
 track 	type=bedGraph 	name=NT_chr22-s1	description=50kbprofile   
 chr22	0	50000	0   
@@ -96,9 +95,9 @@ tail(RS_early)
 | chr22  | 51250000 | 51300000 | 0.000  | 0.000 |
 
 
-#### calculateS50(rs_assay) :
+#### calculateS50(rs_assay):
 
-This functions returns a dataframe composed of genomic coordinates associated with replication timing as an S50 value comprised within 0 (early replicating) and 1 (late replicating)
+This function returns a dataframe composed of genomic coordinates associated with replication timing as an S50 value comprised within 0 (early replicating) and 1 (late replicating).
 
 ```{r}
 
@@ -131,9 +130,9 @@ print(temp_S50)
 | chr1   | 6000  | 7000  | 0.125 |
 
 
-#### calculateURI(rs_x, rs_y) :
+#### calculateURI(rs_x, rs_y):
 
-This functions calculates URI between two Repli-seq assays. It returns a dataframe with the following columns :   
+This function calculates URI between two Repli-seq assays. It returns a dataframe with the following columns:   
 chr,start,stop,sum_x,sum_y,mean_xy,URI
 
 
