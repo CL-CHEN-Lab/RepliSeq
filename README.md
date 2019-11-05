@@ -33,6 +33,14 @@ As mentionned in the DESCRIPTION, this packages imports :
 
 In addition, the function **writeBigWig()** requires UCSC's **wigToBigWig** application to be installed on the computer. It can be found at [encodeproject](https://www.encodeproject.org/software/wigtobigwig/) 
 
+## Authors :
+
+Sami EL HILALI : sami.el-hilali@curie.fr  
+
+Chunlong CHEN : chunlong.chen@curie.fr
+
+Don't hesitate to contact the authors or open an issue for a question or if you wish to see new features added to this package.
+
 ## Usage examples : 
 
 We propose an overview of some functions usage. For extended documentation, please refer to the Vignette *how-to-use*.
