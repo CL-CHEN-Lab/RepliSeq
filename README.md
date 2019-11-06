@@ -4,7 +4,7 @@
 Analysis of Repli-Seq data to study DNA replication timing program in R.  
 
 
-## Description:
+## Description :
 
 An R package that features a set of functions to conduct Repli-seq data analysis.  
 We propose this package to analyze Repli-seq data within data.frames, which lets you easily 
@@ -24,7 +24,7 @@ devtools::install_github("CL-CHEN-Lab/RepliSeq")
 
 ```
 
-## Requirements:
+## Requirements :
 
 This package depends on:
 
@@ -45,11 +45,11 @@ Chunlong CHEN : chunlong.chen@curie.fr
 
 Don't hesitate to contact the authors or open an issue for a question or if you wish to see new features to be added to this package.
 
-## Usage examples: 
+## Usage examples : 
 
 We propose an overview of some function usage. For extended documentation, please refer to the Vignette *how-to-use*.
 
-#### readRS(path_data,fractions):
+#### readRS(path_data,fractions) :
 
 This function reads Repli-seq assays from multiple files (one file for one fraction) and outputs a dataframe from it.   
 It requires bedgraph inputs [(see bedgraph spec)](http://genome.ucsc.edu/goldenPath/help/bedgraph.html) with a one line header but **no other comments** such as:  
@@ -95,7 +95,7 @@ tail(RS_early)
 | chr22  | 51250000 | 51300000 | 0.000  | 0.000 |
 
 
-#### calculateS50(rs_assay):
+#### calculateS50(rs_assay) :
 
 This function returns a dataframe composed of genomic coordinates associated with replication timing as an S50 value comprised within 0 (early replicating) and 1 (late replicating).
 
@@ -130,7 +130,7 @@ print(temp_S50)
 | chr1   | 6000  | 7000  | 0.125 |
 
 
-#### calculateURI(rs_x, rs_y):
+#### calculateURI(rs_x, rs_y) :
 
 This function calculates URI between two Repli-seq assays. It returns a dataframe with the following columns:   
 chr,start,stop,sum_x,sum_y,mean_xy,URI
