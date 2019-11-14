@@ -8,7 +8,7 @@ Description: This Package contains a set of functions for the analysis of Repli-
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.0
 Suggests: 
     knitr,
     rmarkdown

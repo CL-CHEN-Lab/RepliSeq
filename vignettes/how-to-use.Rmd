@@ -29,8 +29,9 @@ chr22	50000	100000	0
 ```{r}
 
 ### args :
-temp_paths <- c("../inst/extdata/NT_chr22-s1.bdg","../inst/extdata/NT_chr22-s2.bdg","../inst/extdata/NT_chr22-s3.bdg",
-                "../inst/extdata/NT_chr22-s4.bdg","../inst/extdata/NT_chr22-s5.bdg","../inst/extdata/NT_chr22-s6.bdg")
+temp_paths <- c("../inst/extdata/NT_chr22-s1.bdg","../inst/extdata/NT_chr22-s2.bdg",
+                "../inst/extdata/NT_chr22-s3.bdg","../inst/extdata/NT_chr22-s4.bdg",
+                "../inst/extdata/NT_chr22-s5.bdg","../inst/extdata/NT_chr22-s6.bdg")
 temp_fractions <- c("S1","S2","S3","S4","S5","S6")
 
 ### 2 fractions RepliSeq
@@ -69,7 +70,7 @@ RS_early_100kb <- rescaleRS(RS_early,2)
 # outputs :
 tail(RS_early_100kb)
 
-### 2 fractions RepliSeq
+### 6 fractions RepliSeq
 # apply function :
 RS_all_100kb <- rescaleRS(RS_all,2)
 # outputs :
@@ -99,7 +100,7 @@ RS_early_smoothed_2 <- smoothRS(RS_early,2)
 # outputs :
 tail(RS_early_smoothed_2)
 
-### 2 fractions RepliSeq
+### 6 fractions RepliSeq
 # apply function :
 RS_all_100kb <- rescaleRS(RS_all,2)
 # outputs :
@@ -112,6 +113,28 @@ RS_S0_100kb <- rescaleRS(RS_S0,2)
 tail(RS_S0_100kb)
 
 ```
+
+# normalizeRS(rs_assay,norm_ratios) :
+
+```{r}
+
+### 6 fractions RepliSeq
+# 1st calculate ratios for a sum == 15M :
+norm_ratios <- c(sum(RS_all$S1) / 2000,
+                 sum(RS_all$S2) / 2000,
+                 sum(RS_all$S3) / 2000,
+                 sum(RS_all$S4) / 2000,
+                 sum(RS_all$S5) / 2000,
+                 sum(RS_all$S6) / 2000)
+
+print(norm_ratios)
+# apply function :
+RS_all_normlized_15M <- normalizeRS(RS_all,norm_ratios)
+# outputs :
+tail(RS_all_normlized_15M)
+
+```
+
 
 
 # calculateS50(rs_assay) :
@@ -155,8 +178,9 @@ chr,start,stop,sum_x,sum_y,mean_xy,URI
 ```{r}
 ####### load second Repli-seq assay for comparison :
 ### args :
-aph_paths <- c("../inst/extdata/Aph_chr22-s1.bdg","../inst/extdata/Aph_chr22-s2.bdg","../inst/extdata/Aph_chr22-s3.bdg",
-                "../inst/extdata/Aph_chr22-s4.bdg","../inst/extdata/Aph_chr22-s5.bdg","../inst/extdata/Aph_chr22-s6.bdg")
+aph_paths <- c("../inst/extdata/Aph_chr22-s1.bdg","../inst/extdata/Aph_chr22-s2.bdg",
+               "../inst/extdata/Aph_chr22-s3.bdg","../inst/extdata/Aph_chr22-s4.bdg",
+               "../inst/extdata/Aph_chr22-s5.bdg","../inst/extdata/Aph_chr22-s6.bdg")
 aph_fractions <- c("S1","S2","S3","S4","S5","S6")
 
 # read :
