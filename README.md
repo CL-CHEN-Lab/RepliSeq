@@ -4,17 +4,16 @@
 Analysis of Repli-Seq data to study DNA replication timing program in R.  
 
 
-## Description :
+## Description:
 
 An R package that features a set of functions to conduct Repli-seq data analysis.  
-We propose this package to analyze Repli-seq data within data.frames, which lets you easily 
-complete your analysis with dplyr, calculate intersections with tidygenomics and plot your results with ggplot vizualizations.   
-RepliSeq functions include **loading** multi-fractions (from 2 to N fractions defined by your experiment dessign and your hardware capabilities) Repli-seq assay data as count matrices; **rescaling** profiles; **smoothing** profiles;
-calculting metrics such as **Replication timing** (calculated as the S50, on a scale from 0, early, to 1, late, which is the moment in S phase when a sequence has been replicated in 50% of cells replication timing) and **URI** (Under replication index got 
-from two repliseq assays comparison).
+
+We propose this package to analyze Repli-seq data within data.frames, which lets you easily complete your analysis with dplyr, calculate intersections with tidygenomics and plot your results with ggplot vizualizations.
+
+RepliSeq functions include **loading** multi-fractions (from 2 to N fractions defined by your experiment dessign and your hardware capabilities) Repli-seq assay data as count matrices; **rescaling** profiles; **smoothing** profiles; calculting metrics such as **Replication timing** (calculated as the S50, on a scale from 0, early, to 1, late, which is the moment in S phase when a sequence has been replicated in 50% of cells replication timing) and **URI** (Under replication index got from two repliseq assays comparison).
 
 
-## Installation :
+## Installation:
 
 You can install this package by entering the following within R:
 
@@ -24,7 +23,7 @@ devtools::install_github("CL-CHEN-Lab/RepliSeq")
 
 ```
 
-## Requirements :
+## Requirements:
 
 This package depends on:
 
@@ -37,7 +36,8 @@ As mentionned in the DESCRIPTION, this packages imports:
 
 In addition, the function **writeBigWig()** requires UCSC's **wigToBigWig** application to be installed on the computer. It can be found at [encodeproject](https://www.encodeproject.org/software/wigtobigwig/) 
 
-## Authors :
+
+## Authors:
 
 Sami EL HILALI : sami.el-hilali@curie.fr  
 
@@ -45,11 +45,20 @@ Chunlong CHEN : chunlong.chen@curie.fr
 
 Don't hesitate to contact the authors or open an issue for a question or if you wish to see new features to be added to this package.
 
-## Usage examples : 
+
+## References: 
+
+Brison O., EL-Hilali S., Azar D., Koundrioukoff1 S., Schmidt M, Naehse-Kumpf V., Jaszczyszyn Y., Lachages A.M., Dutrillaux B., Thermes C., Debatisse M. and CHEN C.L. (2019) [Transcription-Mediated Organization of the Replication Initiation Program Across Large Genes Sets Up Common Fragile Sites Genome-Wide](https://doi.org/10.1101/714717,). bioRxiv, doi: https://doi.org/10.1101/714717, *Nat. Commun*. Final revision.
+
+Chen C.L., Rappailles A., Duquenne L., Huvet M., Guilbaud G., Farinelli L, Audit B, d'Aubenton-Carafa Y., Arneodo A., Hyrien O. and Thermes C. (2010) [Impact of replication timing on non-CpG and CpG substitution rates in mammalian genomes](https://genome.cshlp.org/content/20/4/447.long). *Genome. Res.* 20, 447-457. 
+
+
+
+## Usage examples: 
 
 We propose an overview of some function usage. For extended documentation, please refer to the Vignette *how-to-use*.
 
-#### readRS(path_data,fractions) :
+#### readRS(path_data,fractions):
 
 This function reads Repli-seq assays from multiple files (one file for one fraction) and outputs a dataframe from it.   
 It requires bedgraph inputs [(see bedgraph spec)](http://genome.ucsc.edu/goldenPath/help/bedgraph.html) with a one line header but **no other comments** such as:  
@@ -95,7 +104,7 @@ tail(RS_early)
 | chr22  | 51250000 | 51300000 | 0.000  | 0.000 |
 
 
-#### calculateS50(rs_assay) :
+#### calculateS50(rs_assay):
 
 This function returns a dataframe composed of genomic coordinates associated with replication timing as an S50 value comprised within 0 (early replicating) and 1 (late replicating).
 
@@ -130,7 +139,7 @@ print(temp_S50)
 | chr1   | 6000  | 7000  | 0.125 |
 
 
-#### calculateURI(rs_x, rs_y) :
+#### calculateURI(rs_x, rs_y):
 
 This function calculates URI between two Repli-seq assays. It returns a dataframe with the following columns:   
 chr,start,stop,sum_x,sum_y,mean_xy,URI
