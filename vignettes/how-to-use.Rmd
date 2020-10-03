@@ -114,11 +114,28 @@ tail(RS_S0_100kb)
 
 ```
 
-# normalizeRS(rs_assay,norm_ratios) :
+# weight_phases(rs_assay, G1_peak,G2_peak,gates,SimSPhase=NA,TotalReads=NA) :
 
 ```{r}
 
 ### 6 fractions RepliSeq
+# calculate a normalization factor for each phase based on the experimental FACS profile and a simulation of S-phase progressio (Percentage of replicated DNA, Number of active forks):
+norm_ratios <- weight_phases(rs_assay = RS_all,
+                             G1_peak = 24.15,
+                             G2_peak = 44.2,
+                             gates = data.frame( start=c(24.2519169380677,27.282955036018755,30.61406625807228,34.19265411124849,37.47504529876629,40.60739992423285),
+    end=c(27.282955036018755,30.61406625807228,34.19265411124849,37.47504529876629,40.60739992423285,47.27059148295092)),
+    TotalReads = 2000*6 )
+
+print(norm_ratios)
+
+```
+
+# normalizeRS(rs_assay,norm_ratios) :
+
+```{r}
+### 6 fractions RepliSeq
+# As alternative to the use of weight_phases
 # 1st calculate ratios for a sum == 15M :
 norm_ratios <- c(sum(RS_all$S1) / 2000,
                  sum(RS_all$S2) / 2000,
@@ -127,11 +144,10 @@ norm_ratios <- c(sum(RS_all$S1) / 2000,
                  sum(RS_all$S5) / 2000,
                  sum(RS_all$S6) / 2000)
 
-print(norm_ratios)
-# apply function :
-RS_all_normlized_15M <- normalizeRS(RS_all,norm_ratios)
+# apply normalizeRS:
+RS_all_normlized<- normalizeRS(RS_all,norm_ratios)
 # outputs :
-tail(RS_all_normlized_15M)
+tail(RS_all_normlized)
 
 ```
 
