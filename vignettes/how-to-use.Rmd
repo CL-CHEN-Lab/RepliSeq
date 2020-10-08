@@ -136,7 +136,7 @@ print(norm_ratios)
 ```{r}
 ### 6 fractions RepliSeq
 # As alternative to the use of weight_phases
-# 1st calculate ratios for a sum == 2M :
+# 1st calculate ratios for a sum == 2000 :
 norm_ratios <- c(sum(RS_all$S1) / 2000,
                  sum(RS_all$S2) / 2000,
                  sum(RS_all$S3) / 2000,
