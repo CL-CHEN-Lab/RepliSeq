@@ -40,9 +40,7 @@ In addition, the function **writeBigWig()** requires UCSC's **wigToBigWig** appl
 
 ## Authors:
 
-Sami EL HILALI : sami.el-hilali@curie.fr (current email: elhilali.sami@gmail.com) 
-
-Chunlong CHEN : chunlong.chen@curie.fr
+[Sami EL HILALI](mailto:elhilali.sami@gmail.com) and [Chunlong CHEN](mailto:chunlong.chen@curie.fr) (Institut Curie)
 
 Don't hesitate to contact the authors or open an issue for a question or if you wish to see new features to be added to this package.
 
