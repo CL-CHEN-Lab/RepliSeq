@@ -15,7 +15,7 @@ normalizeRS <- function(rs_assay, norm_ratios,round_digits = 3) {
   to_return <- rs_assay[,(names(rs_assay) %in% c("chr","start","stop"))]
   # proceed to normalization :
   for (i in c(1:length(names(temp_fractions)))) {
-    ratio_to_divide <- as.integer(norm_ratios[i][[1]])
+    ratio_to_divide <- as.double(norm_ratios[i][[1]])
     list_to_divide <- rs_assay[,names(temp_fractions)[i]]
     temp_normalized <- list_to_divide / ratio_to_divide
     temp_normalized <- round(temp_normalized,digits = round_digits)
