@@ -4,8 +4,16 @@
 \alias{writeBigwig}
 \title{Write BigWig files of Repli-seq assays}
 \usage{
-writeBigwig(rs_assay, path_file, sample_name, chromsizes, wiggle_start,
-  wiggle_step, wiggle_span, system_separator = "/")
+writeBigwig(
+  rs_assay,
+  path_file,
+  sample_name,
+  chromsizes,
+  wiggle_start,
+  wiggle_step,
+  wiggle_span,
+  system_separator = "/"
+)
 }
 \arguments{
 \item{rs_assay}{a Repli-seq assay (data.frame) loaded with readRS() and formatted as chr,start,stop,S1,...,Sx (or S0)}
