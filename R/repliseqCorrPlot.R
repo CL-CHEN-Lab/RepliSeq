@@ -6,7 +6,7 @@
 #' @param ordering a character in either "original","AOE", "FPC", "hclust", "alphabet" to reorder the compared variables (to fill the corrplot() order parameter )
 #'
 #' @return a mixed correlation plot
-#' @importFrom  RColorBrewer brewer.pal
+#' @importFrom RColorBrewer brewer.pal
 #' @importFrom corrplot corrplot.mixed
 #' @export
 #'
