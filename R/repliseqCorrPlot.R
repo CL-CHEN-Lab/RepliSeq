@@ -14,7 +14,7 @@
 #'
 
 
-repliseqCorrPlot <- function(rs_assay,corr_method = "pearson",ordering = "original",plottype="mixed") {
+repliseqCorrPlot <- function(rs_assay,corr_method = "pearson",ordering = "original",plottype="mixed",plot_tlcol="black") {
   temp_rs_assay <- rs_assay[,!(names(rs_assay) %in% c("chr","start","stop"))]
   # ressource : http://www.sthda.com/french/wiki/visualiser-une-matrice-de-correlation-par-un-correlogramme
   # Calculate correlation matrix
@@ -31,10 +31,10 @@ repliseqCorrPlot <- function(rs_assay,corr_method = "pearson",ordering = "origin
   }
   else {
     corrplot(temp.cor,is.corr = FALSE, type = plottype,
-                   order=ordering, tl.col="black",addrect = 2,
-                   upper.col = brewer.pal(n = 10, name = "PuOr"),
-                   lower.col= brewer.pal(n = 10, name = "PuOr"),
-                   tl.cex=0.8,number.cex = 0.8,cl.cex = 0.8)
+             order=ordering, tl.col=plot_tlcol,addrect = 2,
+             upper.col = brewer.pal(n = 10, name = "PuOr"),
+             lower.col= brewer.pal(n = 10, name = "PuOr"),
+             tl.cex=0.8,number.cex = 0.8,cl.cex = 0.8)
   }
   
 }
