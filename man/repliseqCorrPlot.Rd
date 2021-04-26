@@ -4,7 +4,12 @@
 \alias{repliseqCorrPlot}
 \title{Calculate and plot correlation plots.}
 \usage{
-repliseqCorrPlot(rs_assay, corr_method = "pearson", ordering = "original")
+repliseqCorrPlot(
+  rs_assay,
+  corr_method = "pearson",
+  ordering = "original",
+  plottype = "mixed"
+)
 }
 \arguments{
 \item{rs_assay}{a Repli-seq assay (data.frame) loaded with readRS() and formatted as chr,start,stop,S1,...,Sx}
@@ -12,6 +17,8 @@ repliseqCorrPlot(rs_assay, corr_method = "pearson", ordering = "original")
 \item{corr_method}{character in either "pearson","spearman" or "kendall" to use as a parameter for cor.test function}
 
 \item{ordering}{a character in either "original","AOE", "FPC", "hclust", "alphabet" to reorder the compared variables (to fill the corrplot() order parameter )}
+
+\item{plottype}{from corrplot type argument. either "upper", "lower" or "mixed". default = "mixed".}
 }
 \value{
 a mixed correlation plot

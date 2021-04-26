@@ -4,7 +4,8 @@
 #' @param rs_assay a Repli-seq assay (data.frame) loaded with readRS() and formatted as chr,start,stop,S1,...,Sx
 #' @param corr_method character in either "pearson","spearman" or "kendall" to use as a parameter for cor.test function
 #' @param ordering a character in either "original","AOE", "FPC", "hclust", "alphabet" to reorder the compared variables (to fill the corrplot() order parameter )
-#'
+#' @param plottype from corrplot type argument. either "upper", "lower" or "mixed". default = "mixed".
+#' 
 #' @return a mixed correlation plot
 #' @importFrom RColorBrewer brewer.pal
 #' @importFrom corrplot corrplot.mixed
@@ -12,7 +13,7 @@
 #'
 
 
-repliseqCorrPlot <- function(rs_assay,corr_method = "pearson",ordering = "original") {
+repliseqCorrPlot <- function(rs_assay,corr_method = "pearson",ordering = "original",plottype="mixed") {
   temp_rs_assay <- rs_assay[,!(names(rs_assay) %in% c("chr","start","stop"))]
   # ressource : http://www.sthda.com/french/wiki/visualiser-une-matrice-de-correlation-par-un-correlogramme
   # Calculate correlation matrix
@@ -20,11 +21,21 @@ repliseqCorrPlot <- function(rs_assay,corr_method = "pearson",ordering = "origin
   # Calculate p-values associated with each correlation
   p.mat <- cor.mtest(temp.cor)
   # plot the correlation matrix
-  corrplot.mixed(temp.cor,is.corr = FALSE,
-                           order=ordering, tl.col="black",addrect = 2,
-                           upper.col = brewer.pal(n = 10, name = "PuOr"),
-                           lower.col= brewer.pal(n = 10, name = "PuOr"),
-                           tl.cex=0.8,number.cex = 0.8,cl.cex = 0.8)
+  if (type == "mixed") {
+    corrplot.mixed(temp.cor,is.corr = FALSE,
+                   order=ordering, tl.col="black",addrect = 2,
+                   upper.col = brewer.pal(n = 10, name = "PuOr"),
+                   lower.col= brewer.pal(n = 10, name = "PuOr"),
+                   tl.cex=0.8,number.cex = 0.8,cl.cex = 0.8)
+  }
+  else {
+    corrplot(temp.cor,is.corr = FALSE, type = plottype,
+                   order=ordering, tl.col="black",addrect = 2,
+                   upper.col = brewer.pal(n = 10, name = "PuOr"),
+                   lower.col= brewer.pal(n = 10, name = "PuOr"),
+                   tl.cex=0.8,number.cex = 0.8,cl.cex = 0.8)
+  }
+  
 }
 
 ###########
