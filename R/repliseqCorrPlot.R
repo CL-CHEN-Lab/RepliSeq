@@ -21,7 +21,7 @@ repliseqCorrPlot <- function(rs_assay,corr_method = "pearson",ordering = "origin
   # Calculate p-values associated with each correlation
   p.mat <- cor.mtest(temp.cor)
   # plot the correlation matrix
-  if (type == "mixed") {
+  if (plottype == "mixed") {
     corrplot.mixed(temp.cor,is.corr = FALSE,
                    order=ordering, tl.col="black",addrect = 2,
                    upper.col = brewer.pal(n = 10, name = "PuOr"),
