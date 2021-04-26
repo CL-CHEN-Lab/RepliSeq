@@ -9,6 +9,7 @@
 #' @return a mixed correlation plot
 #' @importFrom RColorBrewer brewer.pal
 #' @importFrom corrplot corrplot.mixed
+#' @importFrom corrplot corrplot
 #' @export
 #'
 
