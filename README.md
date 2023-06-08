@@ -25,7 +25,8 @@ vignette("RepliSeq")
 
 ## Requirements:
 
-The function **writeBigWig()** requires UCSC's **wigToBigWig** application to be installed on the computer. It can be found at [encodeproject](https://www.encodeproject.org/software/wigtobigwig/) 
+The function **writeBigWig()** requires UCSC's **wigToBigWig** application to be installed on the computer.   
+It can be found at [encodeproject](https://www.encodeproject.org/software/wigtobigwig/) 
 
 
 ## Usage : 
