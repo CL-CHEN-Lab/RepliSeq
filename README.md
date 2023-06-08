@@ -1,6 +1,7 @@
-# RepliSeq 
+# RepliSeq <a><img src='https://github.com/SamiLhll/RepliSeq/blob/7f8770efaa51c2e0ac824576196ae4fd5f58b837/inst/img/Repliseq_logo.png' align="right" height="230" /></a>
 
-This is an R package which aims at helping to process Repli-seq data. It takes raw counts (Bedgraph file format) as input and makes it then quick and easy to further analyze the DNA replication timing with a set of functions to manipulate and vizualize the data. RepliSeq functions include **loading** multi-fraction Repli-seq assay data as count matrices (from 2 to N fractions depending on the experimental design) but also **rescaling** profiles to any resolution and calculting the **Replication timing** as the S50 (moment in the S-phase where a loci reaches 50% of its total measured replication on a scale from 0, early, to 1, late)
+This is an R package which aims at helping to process Repli-seq data. It takes raw counts (Bedgraph file format) as input and makes it then quick and easy to further analyze the DNA replication timing with a set of functions to manipulate and vizualize the data.   
+RepliSeq functions include **loading** multi-fraction Repli-seq assay data as count matrices (from 2 to N fractions depending on the experimental design) but also **rescaling** profiles to any resolution and calculting the **Replication timing** as the S50 (moment in the S-phase where a loci reaches 50% of its total replication on a scale from 0, early, to 1, late)
 
 <!-- badges: start -->
   [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
@@ -29,14 +30,14 @@ The function **writeBigWig()** requires UCSC's **wigToBigWig** application to be
 
 ## Usage : 
 
-We propose an overview of some function usage. For extended documentation, please refer to the Vignette *how-to-use*.
+Check out the vignette for extended documentation.
 
-#### readRS(path_data,fractions):
+#### Loading repliseq data :
 
-This function reads Repli-seq assays from multiple files (one file for one fraction) and outputs a dataframe from it.   
-It requires bedgraph inputs [(see bedgraph spec)](http://genome.ucsc.edu/goldenPath/help/bedgraph.html) with a one line header but **no other comments** such as:  
+The function *readRS(path_data,fractions)* reads Repli-seq assays from multiple files (one file per fraction) and returns a dataframe.   
+It requires bedgraph inputs [(see bedgraph spec)](http://genome.ucsc.edu/goldenPath/help/bedgraph.html) with a one line header but no other comments such as: 
 
-track 	type=bedGraph 	name=NT_chr22-s1	description=50kbprofile   
+track 	type=bedGraph 	name=NT_chr22-s1	description=50kb   
 chr22	0	50000	0   
 chr22	50000	100000	0   
 
@@ -77,9 +78,9 @@ tail(RS_early)
 | chr22  | 51250000 | 51300000 | 0.000  | 0.000 |
 
 
-#### calculateS50(rs_assay):
+#### Compute the replication timing (S50) :
 
-This function returns a dataframe composed of genomic coordinates associated with replication timing as an S50 value comprised within 0 (early replicating) and 1 (late replicating).
+The function *calculateS50(rs_assay)* returns a dataframe composed of genomic coordinates associated with replication timing as an S50 [(Chen et al. (2010))](https://doi.org/10.1101/gr.098947.109) value comprised within 0 (early replicating) and 1 (late replicating).
 
 ```{r}
 
@@ -111,7 +112,9 @@ print(temp_S50)
 | chr1   | 5000  | 6000  | 0.250 |
 | chr1   | 6000  | 7000  | 0.125 |
 
+# Compare the total replication among Repli-Seq assays :
 
+As introduced in [Brison,.O, El-Hilali,S. et al. (2019)](https://doi.org/10.1038/s41467-019-13674-5), Repli-Seq assays could be compared to quantitatively assess which parts of DNA were the most affected by Aphidicolin. The function *calculateURI()* calculates this Under Replication Index (URI) from two Repli-Seq assays loaded with *readRS()*.
 
 ```{r}
 ####### load second Repli-seq assay for comparison 
