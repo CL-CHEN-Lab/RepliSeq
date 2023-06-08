@@ -36,7 +36,7 @@ Check out the vignette for extended documentation.
 #### Loading repliseq data :
 
 The function *readRS(path_data,fractions)* reads Repli-seq assays from multiple files (one file per fraction) and returns a dataframe.   
-It requires bedgraph inputs [(see bedgraph spec)](http://genome.ucsc.edu/goldenPath/help/bedgraph.html) with a one line header but no other comments such as: 
+It requires bedgraph inputs [(see bedgraph specifications)](http://genome.ucsc.edu/goldenPath/help/bedgraph.html) with a one line header but no other comments such as: 
 
 track 	type=bedGraph 	name=NT_chr22-s1	description=50kb   
 chr22	0	50000	0   
