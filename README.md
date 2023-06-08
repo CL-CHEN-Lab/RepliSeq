@@ -1,52 +1,33 @@
-# RepliSeq   
-
+# RepliSeq 
 
 This is an R package which aims at helping to process Repli-seq data. It takes raw counts (Bedgraph file format) as input and makes it then quick and easy to further analyze the DNA replication timing with a set of functions to manipulate and vizualize the data. RepliSeq functions include **loading** multi-fraction Repli-seq assay data as count matrices (from 2 to N fractions depending on the experimental design) but also **rescaling** profiles to any resolution and calculting the **Replication timing** as the S50 (moment in the S-phase where a loci reaches 50% of its total measured replication on a scale from 0, early, to 1, late)
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+<!-- badges: start -->
+  [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+<!-- badges: end -->
+
+
+-----------------------------------------------------------------------  
 
 ## Installation:
 
 You can install this package by entering the following within R:
 
 ```{r}
-
-devtools::install_github("CL-CHEN-Lab/RepliSeq")
+# get the development version from GitHub using devtools :
+# install.packages("devtools")
+devtools::install_github("SamiLhll/RepliSeq",build_vignettes = TRUE)
+# building the vignette makes the installation a bit longer but its mandatory so ou can access it by doing :   
+vignette("RepliSeq")
 
 ```
 
 ## Requirements:
 
-This package depends on:
-
-* R version >= 3.4.4 (2018-03-15)
-
-As mentionned in the DESCRIPTION, this packages imports: 
-
-* dplyr (>= 0.8.3)  
-* magrittr (>= 1.5)
-
-In addition, the function **writeBigWig()** requires UCSC's **wigToBigWig** application to be installed on the computer. It can be found at [encodeproject](https://www.encodeproject.org/software/wigtobigwig/) 
+The function **writeBigWig()** requires UCSC's **wigToBigWig** application to be installed on the computer. It can be found at [encodeproject](https://www.encodeproject.org/software/wigtobigwig/) 
 
 
-
-## Authors:
-
-[Sami EL HILALI](mailto:elhilali.sami@gmail.com) and [Chunlong CHEN](mailto:chunlong.chen@curie.fr) (Institut Curie)
-
-Don't hesitate to contact the authors or open an issue for a question or if you wish to see new features to be added to this package.
-
-
-
-## References: 
-
-Brison O., El-Hilali S., Azar, D., Koundrioukoff1 S., Schmidt M., Naehse-Kumpf V., Jaszczyszyn Y., Lachages A.M., Dutrillaux B., Thermes C., Debatisse M. and Chen C.L. (2019) [Transcription-Mediated Organization of the Replication Initiation Program Across Large Genes Sets Up Common Fragile Sites Genome-Wide.](https://doi.org/10.1038/s41467-019-13674-5) ***Nat. Commun.*** 10, 5693
-
-Chen C.L., Rappailles A., Duquenne L., Huvet M., Guilbaud G., Farinelli L, Audit B, d'Aubenton-Carafa Y., Arneodo A., Hyrien O. and Thermes C. (2010) [Impact of replication timing on non-CpG and CpG substitution rates in mammalian genomes](https://genome.cshlp.org/content/20/4/447.long). ***Genome. Res.*** 20, 447-457. 
-
-
-
-## Usage examples: 
+## Usage : 
 
 We propose an overview of some function usage. For extended documentation, please refer to the Vignette *how-to-use*.
 
@@ -131,11 +112,6 @@ print(temp_S50)
 | chr1   | 6000  | 7000  | 0.125 |
 
 
-#### calculateURI(rs_x, rs_y):
-
-This function calculates URI between two Repli-seq assays. It returns a dataframe with the following columns:   
-chr,start,stop,sum_x,sum_y,mean_xy,URI
-
 
 ```{r}
 ####### load second Repli-seq assay for comparison 
@@ -172,4 +148,22 @@ tail(aph_nt_uri)
 | chr22  | 51150000 | 51200000 | 32.394 | 26.028 | 29.211  | 1.24529116  |
 | chr22  | 51200000 | 51250000 | 10.063 | 8.533  | 9.298   | 0.82273039  |
 | chr22  | 51250000 | 51300000 | 0.000  | 0.000  | 0.000   | NaN         |
+
+  
+## Getting help :
+  
+Need help, Identified a bug, or want to see other features implemented ?   
+Feel free to open an issue here or send an email to the authors :   
+  
+[Sami EL HILALI](mailto:elhilali.sami@gmail.com) and [Chunlong CHEN](mailto:chunlong.chen@curie.fr)
+
+
+## References: 
+
+Brison O., El-Hilali S., Azar, D., Koundrioukoff1 S., Schmidt M., Naehse-Kumpf V., Jaszczyszyn Y., Lachages A.M., Dutrillaux B., Thermes C., Debatisse M. and Chen C.L. (2019) [Transcription-Mediated Organization of the Replication Initiation Program Across Large Genes Sets Up Common Fragile Sites Genome-Wide.](https://doi.org/10.1038/s41467-019-13674-5) ***Nat. Commun.*** 10, 5693
+
+Chen C.L., Rappailles A., Duquenne L., Huvet M., Guilbaud G., Farinelli L, Audit B, d'Aubenton-Carafa Y., Arneodo A., Hyrien O. and Thermes C. (2010) [Impact of replication timing on non-CpG and CpG substitution rates in mammalian genomes](https://genome.cshlp.org/content/20/4/447.long). ***Genome. Res.*** 20, 447-457. 
+
+
+
   
