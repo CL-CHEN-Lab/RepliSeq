@@ -1,17 +1,9 @@
 # RepliSeq   
+
+
+This is an R package which aims at helping to process Repli-seq data. It takes raw counts (Bedgraph file format) as input and makes it then quick and easy to further analyze the DNA replication timing with a set of functions to manipulate and vizualize the data. RepliSeq functions include **loading** multi-fraction Repli-seq assay data as count matrices (from 2 to N fractions depending on the experimental design) but also **rescaling** profiles to any resolution and calculting the **Replication timing** as the S50 (moment in the S-phase where a loci reaches 50% of its total measured replication on a scale from 0, early, to 1, late)
+
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-
-Analysis of Repli-Seq data to study DNA replication timing program in R.  
-
-
-## Description:
-
-An R package that features a set of functions to conduct Repli-seq data analysis.  
-
-We propose this package to analyze Repli-seq data within data.frames, which lets you easily complete your analysis with dplyr, calculate intersections with tidygenomics and plot your results with ggplot vizualizations.
-
-RepliSeq functions include **loading** multi-fractions (from 2 to N fractions defined by your experiment dessign and your hardware capabilities) Repli-seq assay data as count matrices; **rescaling** profiles; **smoothing** profiles; calculting metrics such as **Replication timing** (calculated as the S50, on a scale from 0, early, to 1, late, which is the moment in S phase when a sequence has been replicated in 50% of cells replication timing) and **URI** (Under replication index got from two repliseq assays comparison).
-
 
 ## Installation:
 
@@ -48,9 +40,9 @@ Don't hesitate to contact the authors or open an issue for a question or if you 
 
 ## References: 
 
-Brison O., El-Hilali S., Azar, D., Koundrioukoff1 S., Schmidt M., Naehse-Kumpf V., Jaszczyszyn Y., Lachages A.M., Dutrillaux B., Thermes C., Debatisse M. and Chen C.L. (2019) [Transcription-Mediated Organization of the Replication Initiation Program Across Large Genes Sets Up Common Fragile Sites Genome-Wide.](https://doi.org/10.1038/s41467-019-13674-5) *Nat. Commun.* 10, 5693
+Brison O., El-Hilali S., Azar, D., Koundrioukoff1 S., Schmidt M., Naehse-Kumpf V., Jaszczyszyn Y., Lachages A.M., Dutrillaux B., Thermes C., Debatisse M. and Chen C.L. (2019) [Transcription-Mediated Organization of the Replication Initiation Program Across Large Genes Sets Up Common Fragile Sites Genome-Wide.](https://doi.org/10.1038/s41467-019-13674-5) ***Nat. Commun.*** 10, 5693
 
-Chen C.L., Rappailles A., Duquenne L., Huvet M., Guilbaud G., Farinelli L, Audit B, d'Aubenton-Carafa Y., Arneodo A., Hyrien O. and Thermes C. (2010) [Impact of replication timing on non-CpG and CpG substitution rates in mammalian genomes](https://genome.cshlp.org/content/20/4/447.long). *Genome. Res.* 20, 447-457. 
+Chen C.L., Rappailles A., Duquenne L., Huvet M., Guilbaud G., Farinelli L, Audit B, d'Aubenton-Carafa Y., Arneodo A., Hyrien O. and Thermes C. (2010) [Impact of replication timing on non-CpG and CpG substitution rates in mammalian genomes](https://genome.cshlp.org/content/20/4/447.long). ***Genome. Res.*** 20, 447-457. 
 
 
 
