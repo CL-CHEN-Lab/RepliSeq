@@ -15,10 +15,10 @@ Authors@R: c(person(given="Sami",
 Maintainer: Sami EL HILALI <elhilali.sami@gmail.com>
 Depends: R (>= 4.1.0)
 Imports: 
-    dplyr (>= 0.8.3),
-    magrittr (>= 1.5),
+    dplyr,
+    magrittr,
     RColorBrewer,
-    ggplot2 (>= 3.2.1),
+    ggplot2,
     corrplot,
     reshape2
 Description: This Package contains a set of functions for the analysis of Repli-Seq data to 
@@ -30,7 +30,8 @@ LazyData: true
 License: GPL-3
 URL: https://github.com/SamiLhll/RepliSeq
 BugReports: https://github.com/SamiLhll/RepliSeq/issues
-RoxygenNote: 7.1.1
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.1
 Suggests: 
     knitr,
     rmarkdown
