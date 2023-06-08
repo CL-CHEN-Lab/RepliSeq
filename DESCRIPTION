@@ -1,18 +1,19 @@
 Package: RepliSeq
 Type: Package
-Title: Repliseq
+Title: Process Repli-Seq data to analyze the DNA replication timing
 Version: 0.0.0.9000
-Author: Sami EL HILALI
+Authors@R: c(person(given="Sami",
+ family ="El Hilali",
+ email = "elhilali.sami@gmail.com",
+ role = c("aut", "cre"),
+ comment = c(ORCID = "0000-0003-4417-8399")),
+ person(given="Chun-Long",
+ family="Chen",
+ role = "aut",
+ comment = c(ORCID = "0000-0002-4795-0295"))
+  )
 Maintainer: Sami EL HILALI <elhilali.sami@gmail.com>
-Description: This Package contains a set of functions for the analysis of Repli-Seq data to study DNA replication timing program. These functions handles repliseq assays as data frames from count matrices (bedgraph format !!) and performs such things as rescaling, data normalization, replication timing calculation (S50), URI calculation.
-License: GPL-3
-Encoding: UTF-8
-LazyData: true
-RoxygenNote: 7.1.1
-Suggests: 
-    knitr,
-    rmarkdown
-VignetteBuilder: knitr
+Depends: R (>= 4.1.0)
 Imports: 
     dplyr (>= 0.8.3),
     magrittr (>= 1.5),
@@ -20,3 +21,17 @@ Imports:
     ggplot2 (>= 3.2.1),
     corrplot,
     reshape2
+Description: This Package contains a set of functions for the analysis of Repli-Seq data to 
+ study DNA replication timing program. These functions handles repliseq assays as data frames 
+ from count matrices (bedgraph format) and performs such things as rescaling, data normalization, 
+ replication timing calculation (S50), URI calculation.
+Encoding: UTF-8
+LazyData: true
+License: GPL-3
+URL: https://github.com/SamiLhll/RepliSeq
+BugReports: https://github.com/SamiLhll/RepliSeq/issues
+RoxygenNote: 7.1.1
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
