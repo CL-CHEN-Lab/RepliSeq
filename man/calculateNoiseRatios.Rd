@@ -4,12 +4,14 @@
 \alias{calculateNoiseRatios}
 \title{Calculate noise ratios}
 \usage{
-calculateNoiseRatios(rs_assay, rs_control)
+calculateNoiseRatios(rs_assay, rs_control, noise_method = "max_density")
 }
 \arguments{
 \item{rs_assay}{a Repli-seq assay (data.frame) loaded with readRS() and formatted as chr,start,stop,S1,...,Sx}
 
 \item{rs_control}{a Repli-seq control assay (data.frame) loaded with readRS() and formatted as chr,start,stop,S0}
+
+\item{noise_method}{either "max_density"(default) or "min_downslope"}
 }
 \value{
 an array with the ratios in the order of rs_assay fractions

@@ -13,7 +13,11 @@
 #' 
 
 
-smoothRS <- function(rs_assay,smooth_factor) {
+smoothRS <- function(rs_assay,
+                     smooth_factor) {
+  
+  chr <- NULL
+  
   # calculate_inital scale :
   initial_scale <- (rs_assay$stop - rs_assay$start)[1]
   # get names

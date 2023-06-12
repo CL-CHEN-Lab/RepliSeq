@@ -13,7 +13,10 @@
 #' 
 
 
-rescaleRS <- function(rs_assay,scale_factor) {
+rescaleRS <- function(rs_assay,
+                      scale_factor) {
+  
+  chr <- NULL
   # calculate_inital scale :
   initial_scale <- (rs_assay$stop - rs_assay$start)[1]
   # get names
@@ -21,7 +24,7 @@ rescaleRS <- function(rs_assay,scale_factor) {
   rs_fractions <- rs_names[rs_names != "chr" & rs_names != "start" & rs_names != "stop"]
   # initialize to_return variable
   to_return <- NULL
-  rs_chroms <- levels(unique(rs_assay$chr))
+  rs_chroms <- unique(rs_assay$chr)
   # iterate on chroms :
   for (i in rs_chroms) {
     # select data :

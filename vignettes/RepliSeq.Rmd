@@ -1,0 +1,282 @@
+---
+title: "RepliSeq"
+author: "Sami El Hilali"
+date: "2023/6/8"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{RepliSeq}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+# Loading a Repli-Seq assay with readRS() :
+
+This functions reads Repli-seq assays from multiple files (one file for one fraction) and outputs a dataframe from it.
+It requires bedgraph inputs with a one line header listing options, with **no other comments** such as : [(bedgraph spec)](http://genome.ucsc.edu/goldenPath/help/bedgraph.html)   
+track 	type=bedGraph 	name=NT_chr22-s1	description=50kbprofile   
+chr22	0	50000	0   
+chr22	50000	100000	0   
+
+All Bedgraph must have the same resolution (size of genomic windows).
+
+```{r}
+library(RepliSeq)
+```
+
+
+```{r}
+
+### arguments :
+S1_path <- system.file("extdata", "NT_chr22-s1.bdg", package="RepliSeq")
+S2_path <- system.file("extdata", "NT_chr22-s2.bdg", package="RepliSeq")
+S3_path <- system.file("extdata", "NT_chr22-s3.bdg", package="RepliSeq")
+S4_path <- system.file("extdata", "NT_chr22-s4.bdg", package="RepliSeq")
+S5_path <- system.file("extdata", "NT_chr22-s5.bdg", package="RepliSeq")
+S6_path <- system.file("extdata", "NT_chr22-s6.bdg", package="RepliSeq")
+S0_path <- system.file("extdata", "NT_chr22-s0.bdg", package="RepliSeq")
+
+rs_fractions <- c("S1","S2","S3","S4","S5","S6")
+
+### Load a 2 fractions Repli-Seq assay
+RS_early <- readRS(c(S1_path,S2_path),
+                   rs_fractions[1:2])
+tail(RS_early)
+
+### Load a 6 fractions Repli-Seq assay
+RS_all <- readRS(c(S1_path,S2_path,S3_path,S4_path,S5_path,S6_path),
+                 rs_fractions)
+tail(RS_all)
+
+### 1 fraction RepliSeq ( for controls ) 
+RS_S0 <- readRS(S0_path,"S0")
+tail(RS_S0)
+
+```
+
+# Adapting the resolution of the assay with rescaleRS() :
+
+This functions rescales Repli-seq assays loaded with readRS to lower resolution ( e.g. from 1kb windows to 50kb windows or 100kb)
+
+```{r}
+
+# To rescale from 50kb to 100kb the scale_factor is 2 ( from 1kb to 50kb it would be 50)
+
+RS_all_100kb <- rescaleRS(RS_all,scale_factor = 2)
+
+tail(RS_all_100kb)
+
+```
+
+# Generating overlapping windows with smoothRS(rs_assay,scale_factor) :
+
+This functions rescales Repli-seq assays loaded with readRS to lower resolution ( e.g. from 1kb windows to 50kb windows or 100kb)
+
+```{r}
+
+# To get 50kb smoothed profiles from 1kb adjacent profiles 
+# smooth_factor = 50 --> results in count matrices with genomic windows 
+# having a step = 1kb and a span of 50kb.
+# From 50kb to 100kb the smooth_factor is 2
+
+RS_all_100kb <- smoothRS(RS_all,smooth_factor = 2)
+tail(RS_all_100kb)
+
+```
+
+# Normalization  :
+
+### Normalize the fractions with normalizeRS() and weight_phases():
+
+This function takes as input a Repli-Seq assay loaded with *readRS()* and an array of ratios.   
+The normalized fractions returned are the fractions divided by the provided ratios.
+
+```{r}
+# Normalizing to a fixed total :
+# Compute ratios for a sum == 2000 :
+
+norm_ratios <- c(sum(RS_all$S1) / 2000,
+                 sum(RS_all$S2) / 2000,
+                 sum(RS_all$S3) / 2000,
+                 sum(RS_all$S4) / 2000,
+                 sum(RS_all$S5) / 2000,
+                 sum(RS_all$S6) / 2000)
+
+RS_all_normlized <- normalizeRS(RS_all,norm_ratios)
+
+tail(RS_all_normlized)
+
+# Use weight_phases() to take into account the FACS gates :
+# calculate a normalization factor for each phase based on the experimental FACS profile and a simulation of S-phase progressio (Percentage of replicated DNA, Number of active forks):
+gates_df <- data.frame(start=c(24.2519169380677,
+                               27.282955036018755,
+                               30.61406625807228,
+                               34.19265411124849,
+                               37.47504529876629,
+                               40.60739992423285),
+                       end=c(27.282955036018755,
+                             30.61406625807228,
+                             34.19265411124849,
+                             37.47504529876629,
+                             40.60739992423285,
+                             47.27059148295092))
+
+norm_ratios <- weight_phases(rs_assay = RS_all,
+                             G1_peak = 24.15,
+                             G2_peak = 44.2,
+                             gates = gates_df,
+                             TotalReads = 2000*6 )
+
+print(norm_ratios)
+
+
+```
+
+
+
+# Compute the replication timing S50 with calculateS50() :
+
+This functions takes a Repli-Seq assay as input and computes the replication timing as the S50 value [(Chen et al. (2010)](https://doi.org/10.1101/gr.098947.109). This value is comprised between 0 (early replicating) and 1 (late replicating).
+
+```{r}
+
+temp_rs <- data.frame(chr = rep("chr1",7),
+                      start = seq(0,6000,1000),
+                      stop = seq(1000,7000,1000),
+                      S1 = c(0,0,0,1,1,1,1),
+                      S2 = c(0,0,1,1,1,1,0),
+                      S3 = c(0,1,1,1,1,0,0),
+                      S4 = c(1,1,1,1,0,0,0))
+
+
+temp_S50 <- calculateS50(temp_rs)
+print(temp_S50)
+
+```
+
+
+# calculateURI(rs_x, rs_y) :
+
+This functions calculates URI between two Repli-seq assays [(Brison,O.,El-Hilali,S. et al. (2019))](https://doi.org/10.1038/s41467-019-13674-5).  
+It returns a dataframe with the following columns :   
+chr,start,stop,sum_x,sum_y,mean_xy,URI
+
+
+```{r}
+####### load second Repli-seq assay for comparison :
+### arguments :
+
+### load Non treated samples :
+S1_path <- system.file("extdata", "NT_chr22-s1.bdg", package="RepliSeq")
+S2_path <- system.file("extdata", "NT_chr22-s2.bdg", package="RepliSeq")
+S3_path <- system.file("extdata", "NT_chr22-s3.bdg", package="RepliSeq")
+S4_path <- system.file("extdata", "NT_chr22-s4.bdg", package="RepliSeq")
+S5_path <- system.file("extdata", "NT_chr22-s5.bdg", package="RepliSeq")
+S6_path <- system.file("extdata", "NT_chr22-s6.bdg", package="RepliSeq")
+S0_path <- system.file("extdata", "NT_chr22-s0.bdg", package="RepliSeq")
+
+rs_fractions <- c("S1","S2","S3","S4","S5","S6")
+
+NT <- readRS(paths_data = c(S1_path,S2_path,S3_path,S4_path,S5_path,S6_path),
+             fraction_names = rs_fractions)
+
+NT <- normalizeRS(rs_assay = NT,
+                  norm_ratios = c(sum(NT$S1) / 2000,
+                                  sum(NT$S2) / 2000,
+                                  sum(NT$S3) / 2000,
+                                  sum(NT$S4) / 2000,
+                                  sum(NT$S5) / 2000,
+                                  sum(NT$S6) / 2000))
+
+# load and normalize samples treated with Aphidicolin :
+S1_path <- system.file("extdata", "Aph_chr22-s1.bdg", package="RepliSeq")
+S2_path <- system.file("extdata", "Aph_chr22-s2.bdg", package="RepliSeq")
+S3_path <- system.file("extdata", "Aph_chr22-s3.bdg", package="RepliSeq")
+S4_path <- system.file("extdata", "Aph_chr22-s4.bdg", package="RepliSeq")
+S5_path <- system.file("extdata", "Aph_chr22-s5.bdg", package="RepliSeq")
+S6_path <- system.file("extdata", "Aph_chr22-s6.bdg", package="RepliSeq")
+
+
+Aph <- readRS(c(S1_path,S2_path,S3_path,S4_path,S5_path,S6_path),
+              fraction_names = rs_fractions)
+
+Aph <- normalizeRS(rs_assay = Aph,
+                   norm_ratios = c(sum(Aph$S1) / 2000,
+                                   sum(Aph$S2) / 2000,
+                                   sum(Aph$S3) / 2000,
+                                   sum(Aph$S4) / 2000,
+                                   sum(Aph$S5) / 2000,
+                                   sum(Aph$S6) / 2000))
+#######
+
+aph_nt_uri <- calculateURI(rs_x = Aph,
+                           rs_y = NT)
+
+tail(aph_nt_uri)
+
+```
+
+
+# Remove noise with calculateNoiseRatios() and removeNoise() :
+
+```{r}
+
+# compute ratios :
+ratios_all <- calculateNoiseRatios(RS_all, RS_S0)
+print(ratios_all)
+
+# use the ratios and the control (S0) to remove noise :
+RS_noise_rm_all <- removeNoise(rs_assay = RS_all,
+                               rs_control = RS_S0,
+                               noise_ratios = ratios_all)
+
+tail(RS_noise_rm_all)
+
+```
+
+# doubleXchr(rs_assay) :
+
+This function can be used to double the values in count matrices at chrX as for example when normalization haven't been performed on raw data from human male samples.
+
+```{r}
+
+RS_all_doubledX <- doubleXchr(RS_all,chr = "chr22") # default chr parameter is "chrX"
+tail(RS_all_doubledX)
+
+
+```
+
+# Export files with writeBedgraph() and writeBigwig() :
+
+**(writeBigwig() requires [wigToBigWig](https://www.encodeproject.org/software/wigtobigwig/) installed on the system)**.   
+This function writes Bigwig profiles for all the fractions of a provided Repli-seq assay. It requires UCSC's WigToBigWig installed to convert from Wiggle to BigWig.   
+
+```{r}
+
+# Write all to Bedgraph :
+
+# writeBedgraph(rs_assay = RS_all,
+#               path_file = "../inst/extdata/output",
+#               sample_name = "NT_all")
+
+# Write all as BigWig :
+
+# writeBigwig(rs_assay = RS_all,
+#             path_file = "../inst/extdata/output",
+#             sample_name = "NT_all",
+#             chromsizes = "../inst/extdata/Hg19/chromsizes.txt",
+#             wiggle_start = 1,
+#             wiggle_step = 50000,
+#             wiggle_span = 50000)
+
+```
+
+
+
