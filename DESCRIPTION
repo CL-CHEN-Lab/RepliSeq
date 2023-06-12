@@ -10,7 +10,11 @@ Authors@R: c(person(given="Sami",
  person(given="Chun-Long",
  family="Chen",
  role = "aut",
- comment = c(ORCID = "0000-0002-4795-0295"))
+ comment = c(ORCID = "0000-0002-4795-0295"),
+ person(given="Stefano",
+ family="Gnan",
+ role = "ctb",
+ comment = c(ORCID = "0000-0003-3314-4302"))
   )
 Maintainer: Sami EL HILALI <elhilali.sami@gmail.com>
 Depends: R (>= 4.1.0)
@@ -23,7 +27,7 @@ Imports:
     reshape2
 Description: This Package contains a set of functions for the analysis of Repli-Seq data to 
  study DNA replication timing program. These functions handles repliseq assays as data frames 
- from count matrices (bedgraph format) and performs such things as rescaling, data normalization, 
+ from count matrices (Bedgraph format) and performs rescaling, data normalization, 
  replication timing calculation (S50), URI calculation.
 Encoding: UTF-8
 LazyData: true
