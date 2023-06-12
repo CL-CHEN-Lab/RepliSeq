@@ -1,6 +1,6 @@
 # RepliSeq <a><img src='https://github.com/SamiLhll/RepliSeq/blob/7f8770efaa51c2e0ac824576196ae4fd5f58b837/inst/img/Repliseq_logo.png' align="right" height="230" /></a>
 
-This is an R package which aims at helping to process Repli-seq data. It takes raw counts (Bedgraph file format) as input and makes it then quick and easy to further analyze the DNA replication timing with a set of functions to manipulate and vizualize the data.   
+This is an R package which aims at processing Repli-seq data. It takes raw counts (Bedgraph file format) as input and makes it then quick and easy to further analyze the DNA replication timing with a set of functions to manipulate and vizualize the data.   
 RepliSeq functions include **loading** multi-fraction Repli-seq assay data as count matrices (from 2 to N fractions depending on the experimental design) but also **rescaling** profiles to any resolution and calculting the **Replication timing** as the S50 (moment in the S-phase where a loci reaches 50% of its total replication on a scale from 0, early, to 1, late)
 
 <!-- badges: start -->
