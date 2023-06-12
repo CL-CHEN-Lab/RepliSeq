@@ -8,8 +8,7 @@ repliseqCorrPlot(
   rs_assay,
   corr_method = "pearson",
   ordering = "original",
-  plottype = "mixed",
-  plot_tlcol = "black"
+  plottype = "mixed"
 )
 }
 \arguments{

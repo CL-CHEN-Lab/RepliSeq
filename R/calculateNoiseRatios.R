@@ -5,6 +5,9 @@
 #' @param rs_control a Repli-seq control assay (data.frame) loaded with readRS() and formatted as chr,start,stop,S0
 #' @param noise_method either "max_density"(default) or "min_downslope"
 #' @return an array with the ratios in the order of rs_assay fractions
+#' 
+#' @importFrom stats density
+#' 
 #' @export
 #'
 
@@ -17,7 +20,7 @@ calculateNoiseRatios <- function(rs_assay, rs_control, noise_method = "max_densi
   to_return <- NULL
   for (fraction in names(temp_fractions)) {
     temp_fraction_vs_control <- round(rs_assay[,fraction] / temp_control, digits = 3)
-    temp_density <- density(temp_fraction_vs_control,na.rm = TRUE)
+    temp_density <- stats::density(temp_fraction_vs_control,na.rm = TRUE)
     if (noise_method == "min_downslope") {
       temp_downslopes <- which(diff(temp_density$y) < 0)
       temp_ratio <- temp_density$x[min(temp_downslopes)]

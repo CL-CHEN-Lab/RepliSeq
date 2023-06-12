@@ -6,6 +6,8 @@
 #' @param sample_name a string for the file names
 #' @param system_separator default is "/" as dedicated for linux file system
 #'
+#' @importFrom utils write.table
+#'
 #' @return NULL
 #' @export
 #'
@@ -21,6 +23,6 @@ writeBedgraph <- function(rs_assay,path_file,sample_name,system_separator = "/")
     to_write <- temp_coords
     to_write[i] <- temp_fraction
     file_name <- paste0(path_file,system_separator,sample_name,"-",i,".bdg")
-    write.table(to_write,file = file_name,quote = FALSE, col.names = header,row.names = FALSE)
+    utils::write.table(to_write,file = file_name,quote = FALSE, col.names = header,row.names = FALSE)
   }
 }

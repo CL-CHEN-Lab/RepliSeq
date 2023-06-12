@@ -10,6 +10,8 @@
 #' @param wiggle_span a numeric value for wiggle header
 #' @param system_separator default is "/" as dedicated for linux file system
 #'
+#' @importFrom utils write.table
+#'
 #' @return NULL
 #' @export
 #' 
@@ -29,7 +31,7 @@ writeBigwig <- function(rs_assay,path_file,sample_name,chromsizes,wiggle_start,w
     }
     # write wiggle ; convert to BigWig and rm wiggle :
     file_name <- paste0(path_file,system_separator,sample_name,"-",i,".wig")
-    write.table(to_write,file = file_name,quote = FALSE, col.names = temp_header,row.names = FALSE)
+    utils::write.table(to_write,file = file_name,quote = FALSE, col.names = temp_header,row.names = FALSE)
     system(paste0("wigToBigWig -clip ",file_name," ",chromsizes," ",file_name,".bw"))
     system(paste0("rm ",file_name))
   }

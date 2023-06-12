@@ -8,30 +8,35 @@
 #' 
 #' @return a mixed correlation plot
 #' @importFrom RColorBrewer brewer.pal
-#' @importFrom corrplot corrplot.mixed
-#' @importFrom corrplot corrplot
+#' @importFrom corrplot corrplot.mixed corrplot
+#' @importFrom stats cor.test cor
+#' 
 #' @export
 #'
 
 
-repliseqCorrPlot <- function(rs_assay,corr_method = "pearson",ordering = "original",plottype="mixed",plot_tlcol="black") {
+repliseqCorrPlot <- function(rs_assay,
+                             corr_method = "pearson",
+                             ordering = "original",
+                             plottype="mixed") {
+  
   temp_rs_assay <- rs_assay[,!(names(rs_assay) %in% c("chr","start","stop"))]
   # ressource : http://www.sthda.com/french/wiki/visualiser-une-matrice-de-correlation-par-un-correlogramme
   # Calculate correlation matrix
-  temp.cor <- cor(temp_rs_assay,method = corr_method)
+  temp.cor <- stats::cor(temp_rs_assay,method = corr_method)
   # Calculate p-values associated with each correlation
   p.mat <- cor.mtest(temp.cor)
   # plot the correlation matrix
   if (plottype == "mixed") {
     corrplot.mixed(temp.cor,is.corr = FALSE,
-                   order=ordering, tl.col="black",addrect = 2,
+                   order=ordering, tl.col= "black",addrect = 2,
                    upper.col = brewer.pal(n = 10, name = "PuOr"),
                    lower.col= brewer.pal(n = 10, name = "PuOr"),
                    tl.cex=0.8,number.cex = 0.8,cl.cex = 0.8)
   }
   else {
     corrplot(temp.cor,is.corr = FALSE, type = plottype,
-             order=ordering, tl.col=plot_tlcol,addrect = 2,
+             order=ordering, tl.col="black",addrect = 2,
              upper.col = brewer.pal(n = 10, name = "PuOr"),
              lower.col= brewer.pal(n = 10, name = "PuOr"),
              tl.cex=0.8,number.cex = 0.8,cl.cex = 0.8)
@@ -49,7 +54,7 @@ cor.mtest <- function(mat, ...) {
   diag(p.mat) <- 0
   for (i in 1:(n - 1)) {
     for (j in (i + 1):n) {
-      tmp <- cor.test(mat[, i], mat[, j], ...)
+      tmp <- stats::cor.test(mat[, i], mat[, j], ...)
       p.mat[i, j] <- p.mat[j, i] <- tmp$p.value
     }
   }
