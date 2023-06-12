@@ -2,18 +2,29 @@
 % Please edit documentation in R/readRS.R
 \name{readRS}
 \alias{readRS}
-\title{Read Repli-seq assay data (bedgraph format).}
+\title{Read Repli-Seq assay data (Bedgraph format).}
 \usage{
-readRS(paths_data, fractions)
+readRS(paths_data = NULL, fraction_names = NULL)
 }
 \arguments{
-\item{paths_data}{list of paths to repliseq fractions files}
+\item{paths_data}{Array. List of paths to Repli-Seq fractions files}
 
-\item{fractions}{list of fractions names}
+\item{fraction_names}{Array. List of fractions names (default = S1, ..., Sn)}
 }
 \value{
 a dataframe composed of genomic coordinates plus all the specified fractions as for example : chr,start,stop,S1,S2,S3,S4,S5,S6
 }
 \description{
-Bedgraphs with a one line header and with similar organization (same length and sorted)
+Read and integrate all Repli-Seq fractions in a single dataframe.
+Fractions must be formatted as Bedgraph with a one line header and with similar resolutions.
+}
+\examples{
+# basic usage of read_RS :
+
+S1_path <- system.file("extdata", "NT_chr22-s1.bdg", package="RepliSeq")
+S2_path <- system.file("extdata", "NT_chr22-s2.bdg", package="RepliSeq")
+
+my_rs_assay <- readRS(paths_data = c(S1_path , S2_path),
+                      fraction_names = c("S1","S2"))
+
 }
